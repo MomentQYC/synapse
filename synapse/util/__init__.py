@@ -198,7 +198,7 @@ SYNAPSE_VERSION = get_distribution_version_string("matrix-synapse", __file__)
 
 
 class Python_Ver:
-    def __init__(self, hs: "HomeServer"):
+    def __init__(self, hs):
         self._config = hs.config
 
     def getPythonVersion(self):
