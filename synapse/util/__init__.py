@@ -29,7 +29,6 @@ from twisted.internet.interfaces import IDelayedCall, IReactorTime
 from twisted.internet.task import LoopingCall
 from twisted.python.failure import Failure
 
-from synapse.config.homeserver import HomeServerConfig
 from synapse.logging import context
 
 if typing.TYPE_CHECKING:
@@ -199,7 +198,7 @@ SYNAPSE_VERSION = get_distribution_version_string("matrix-synapse", __file__)
 
 
 class Python_Ver:
-    def __init__(self, hs_config: HomeServerConfig) -> None:
+    def __init__(self, hs_config) -> None:
         self.config = hs_config.config
 
     def getPythonVersion(self) -> str:
@@ -209,9 +208,14 @@ class Python_Ver:
             return "UNKNOWN"
 
 
-hs_config = HomeServerConfig()
+def get_python_version() -> str:
+    from synapse.config.homeserver import HomeServerConfig
 
-PYTHON_VERSION = Python_Ver(hs_config).getPythonVersion()
+    hs_config = HomeServerConfig()
+    return Python_Ver(hs_config).getPythonVersion()
+
+
+PYTHON_VERSION = get_python_version()
 
 
 class ExceptionBundle(Exception):
