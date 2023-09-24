@@ -53,7 +53,7 @@ from synapse.types import StrSequence
 from synapse.util import SYNAPSE_VERSION
 
 if TYPE_CHECKING:
-    from synapse.server import HomeServer as hs
+    from synapse.server import HomeServer
 
 logger = logging.getLogger(__name__)
 
@@ -418,6 +418,9 @@ event_processing_lag_by_event = Histogram(
 build_info = Gauge(
     "synapse_build_info", "Build information", ["pythonversion", "version", "osversion"]
 )
+
+hs = HomeServer()
+
 python_version = (
     " ".join([platform.python_implementation(), platform.python_version()])
     if not hs.config.server.hide_python_version
