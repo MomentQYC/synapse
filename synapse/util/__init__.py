@@ -210,7 +210,7 @@ class Python_Ver:
 
 def get_python_version():
     from synapse.server import HomeServer
-    
+
     hs = HomeServer()
     return Python_Ver(hs).getPythonVersion()
 
