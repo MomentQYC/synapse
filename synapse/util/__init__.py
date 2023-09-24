@@ -32,7 +32,7 @@ from twisted.python.failure import Failure
 from synapse.logging import context
 
 if typing.TYPE_CHECKING:
-    from synapse.server import HomeServer
+    pass
 
 logger = logging.getLogger(__name__)
 
@@ -208,7 +208,13 @@ class Python_Ver:
             return "UNKNOWN"
 
 
-PYTHON_VERSION = Python_Ver(HomeServer()).getPythonVersion()
+def get_python_version():
+    from synapse.server import HomeServer
+    hs = HomeServer()
+    return Python_Ver(hs).getPythonVersion()
+
+
+PYTHON_VERSION = get_python_version()
 
 
 class ExceptionBundle(Exception):
