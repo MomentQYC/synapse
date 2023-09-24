@@ -2,26 +2,26 @@ import platform
 
 from matrix_common.versionstring import get_distribution_version_string
 
-from synapse.config.homeserver import HomeServerConfig
+from synapse.config.server import ServerConfig
 
-hs_config = HomeServerConfig()
+sv_config = ServerConfig()
 
 SYNAPSE_VERSION = get_distribution_version_string("matrix-synapse", __file__)
 
 
 class Python_Ver:
-    def __init__(self, hs_config) -> None:
-        self.config = hs_config.config
+    def __init__(self, sv_config) -> None:
+        self.config = sv_config.config
 
     def getPythonVersion(self) -> str:
-        if not self.config.server.hide_python_version:
+        if not self.config.hide_python_version:
             return platform.python_version()
         else:
             return "UNKNOWN"
 
 
 def get_python_version() -> str:
-    return Python_Ver(hs_config).getPythonVersion()
+    return Python_Ver(sv_config).getPythonVersion()
 
 
 PYTHON_VERSION = get_python_version()
