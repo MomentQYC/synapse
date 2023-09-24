@@ -49,7 +49,7 @@ from synapse.metrics._gc import MIN_TIME_BETWEEN_GCS, install_gc_manager
 from synapse.metrics._twisted_exposition import MetricsResource, generate_latest
 from synapse.metrics._types import Collector
 from synapse.types import StrSequence
-from synapse.util import PYTHON_VERSION, SYNAPSE_VERSION
+from synapse.util.version import PYTHON_VERSION, SYNAPSE_VERSION
 
 logger = logging.getLogger(__name__)
 

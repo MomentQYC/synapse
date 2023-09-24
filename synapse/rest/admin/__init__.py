@@ -94,7 +94,7 @@ from synapse.rest.admin.users import (
     WhoisRestServlet,
 )
 from synapse.types import JsonDict, RoomStreamToken, TaskStatus
-from synapse.util import PYTHON_VERSION, SYNAPSE_VERSION
+from synapse.util.version import PYTHON_VERSION, SYNAPSE_VERSION
 
 if TYPE_CHECKING:
     from synapse.server import HomeServer
