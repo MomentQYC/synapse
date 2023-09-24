@@ -769,6 +769,8 @@ class ServerConfig(Config):
         else:
             self.delete_stale_devices_after = None
 
+        self.hide_python_version = config.get("hide_python_version", False)
+
     def has_tls_listener(self) -> bool:
         return any(listener.is_tls() for listener in self.listeners)
 
