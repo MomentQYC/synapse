@@ -50,7 +50,9 @@ from synapse.metrics._twisted_exposition import MetricsResource, generate_latest
 from synapse.metrics._types import Collector
 from synapse.types import StrSequence
 from synapse.util import SYNAPSE_VERSION
-from synapse.server import HomeServer as hs
+
+if TYPE_CHECKING:
+    from synapse.server import HomeServer as hs
 
 logger = logging.getLogger(__name__)
 
