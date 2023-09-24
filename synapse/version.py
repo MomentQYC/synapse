@@ -11,7 +11,7 @@ SYNAPSE_VERSION = get_distribution_version_string("matrix-synapse", __file__)
 
 class Python_Ver:
     def __init__(self, sv_config) -> None:
-        self.config = sv_config.config
+        self.config = sv_config
 
     def getPythonVersion(self) -> str:
         if not self.config.hide_python_version:
