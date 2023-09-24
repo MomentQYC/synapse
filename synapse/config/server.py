@@ -36,6 +36,8 @@ from ._util import validate_config
 
 logger = logging.Logger(__name__)
 
+hide_python_version = False
+
 DIRECT_TCP_ERROR = """
 Using direct TCP replication for workers is no longer supported.
 
@@ -769,6 +771,7 @@ class ServerConfig(Config):
         else:
             self.delete_stale_devices_after = None
 
+        global hide_python_version
         self.hide_python_version = config.get("hide_python_version", False)
 
     def has_tls_listener(self) -> bool:
