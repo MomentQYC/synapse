@@ -17,6 +17,7 @@
 
 import logging
 from http import HTTPStatus
+import platform
 from typing import TYPE_CHECKING, Optional, Tuple
 
 from synapse.api.errors import Codes, NotFoundError, SynapseError
@@ -94,7 +95,7 @@ from synapse.rest.admin.users import (
     WhoisRestServlet,
 )
 from synapse.types import JsonDict, RoomStreamToken, TaskStatus
-from synapse.version import PYTHON_VERSION, SYNAPSE_VERSION
+from synapse.version import SYNAPSE_VERSION
 
 if TYPE_CHECKING:
     from synapse.server import HomeServer
@@ -106,6 +107,11 @@ class VersionServlet(RestServlet):
     PATTERNS = admin_patterns("/server_version$")
 
     def __init__(self, hs: "HomeServer"):
+        self.hs = hs
+        if not hs.config.server.hide_python_version:
+            PYTHON_VERSION = "UNKNOWN"
+        else:
+            PYTHON_VERSION = platform.python_version()
         self.res = {"server_version": SYNAPSE_VERSION, "python_version": PYTHON_VERSION}
 
     def on_GET(self, request: SynapseRequest) -> Tuple[int, JsonDict]:

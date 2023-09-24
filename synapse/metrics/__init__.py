@@ -49,7 +49,7 @@ from synapse.metrics._gc import MIN_TIME_BETWEEN_GCS, install_gc_manager
 from synapse.metrics._twisted_exposition import MetricsResource, generate_latest
 from synapse.metrics._types import Collector
 from synapse.types import StrSequence
-from synapse.version import PYTHON_VERSION, SYNAPSE_VERSION
+from synapse.util import SYNAPSE_VERSION
 
 logger = logging.getLogger(__name__)
 
@@ -415,7 +415,7 @@ build_info = Gauge(
     "synapse_build_info", "Build information", ["pythonversion", "version", "osversion"]
 )
 build_info.labels(
-    PYTHON_VERSION,
+    " ".join([platform.python_implementation(), platform.python_version()]),
     SYNAPSE_VERSION,
     " ".join([platform.system(), platform.release()]),
 ).set(1)
