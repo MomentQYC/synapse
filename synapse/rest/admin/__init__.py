@@ -16,8 +16,8 @@
 # limitations under the License.
 
 import logging
-from http import HTTPStatus
 import platform
+from http import HTTPStatus
 from typing import TYPE_CHECKING, Optional, Tuple
 
 from synapse.api.errors import Codes, NotFoundError, SynapseError

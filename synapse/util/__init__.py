@@ -14,7 +14,6 @@
 
 import json
 import logging
-import platform
 import typing
 from typing import Any, Callable, Dict, Generator, Optional, Sequence
 
@@ -195,27 +194,6 @@ def log_failure(
 # Version string with git info. Computed here once so that we don't invoke git multiple
 # times.
 SYNAPSE_VERSION = get_distribution_version_string("matrix-synapse", __file__)
-
-
-class Python_Ver:
-    def __init__(self, hs_config) -> None:
-        self.config = hs_config.config
-
-    def getPythonVersion(self) -> str:
-        if not self.config.server.hide_python_version:
-            return platform.python_version()
-        else:
-            return "UNKNOWN"
-
-
-def get_python_version() -> str:
-    from synapse.config.homeserver import HomeServerConfig
-
-    hs_config = HomeServerConfig()
-    return Python_Ver(hs_config).getPythonVersion()
-
-
-PYTHON_VERSION = get_python_version()
 
 
 class ExceptionBundle(Exception):
