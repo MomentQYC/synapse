@@ -16,7 +16,6 @@
 # limitations under the License.
 
 import logging
-import platform
 from http import HTTPStatus
 from typing import TYPE_CHECKING, Optional, Tuple
 
@@ -95,7 +94,7 @@ from synapse.rest.admin.users import (
     WhoisRestServlet,
 )
 from synapse.types import JsonDict, RoomStreamToken, TaskStatus
-from synapse.util import SYNAPSE_VERSION
+from synapse.util import SYNAPSE_VERSION, PYTHON_VERSION
 
 if TYPE_CHECKING:
     from synapse.server import HomeServer
@@ -110,11 +109,7 @@ class VersionServlet(RestServlet):
         self._config = hs.config
         self.res = {
             "server_version": SYNAPSE_VERSION,
-            "python_version": (
-                platform.python_version()
-                if not hs.config.server.hide_python_version
-                else "UNKNOWN"
-            ),
+            "python_version": PYTHON_VERSION
         }
 
     def on_GET(self, request: SynapseRequest) -> Tuple[int, JsonDict]:

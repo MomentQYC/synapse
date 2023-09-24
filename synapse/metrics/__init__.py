@@ -19,7 +19,6 @@ import os
 import platform
 import threading
 from typing import (
-    TYPE_CHECKING,
     Callable,
     Dict,
     Generic,
@@ -44,14 +43,13 @@ from prometheus_client.core import (
 
 from twisted.python.threadpool import ThreadPool
 
-from synapse.server import HomeServer
 # This module is imported for its side effects; flake8 needn't warn that it's unused.
 import synapse.metrics._reactor_metrics  # noqa: F401
 from synapse.metrics._gc import MIN_TIME_BETWEEN_GCS, install_gc_manager
 from synapse.metrics._twisted_exposition import MetricsResource, generate_latest
 from synapse.metrics._types import Collector
 from synapse.types import StrSequence
-from synapse.util import SYNAPSE_VERSION
+from synapse.util import SYNAPSE_VERSION, PYTHON_VERSION
 
 logger = logging.getLogger(__name__)
 
@@ -416,17 +414,8 @@ event_processing_lag_by_event = Histogram(
 build_info = Gauge(
     "synapse_build_info", "Build information", ["pythonversion", "version", "osversion"]
 )
-
-hs = HomeServer()
-
-python_version = (
-    " ".join([platform.python_implementation(), platform.python_version()])
-    if not hs.config.server.hide_python_version
-    else "Unknown"
-)
-
 build_info.labels(
-    python_version,
+    PYTHON_VERSION,
     SYNAPSE_VERSION,
     " ".join([platform.system(), platform.release()]),
 ).set(1)

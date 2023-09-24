@@ -14,6 +14,7 @@
 
 import json
 import logging
+import platform
 import typing
 from typing import Any, Callable, Dict, Generator, Optional, Sequence
 
@@ -29,6 +30,7 @@ from twisted.internet.task import LoopingCall
 from twisted.python.failure import Failure
 
 from synapse.logging import context
+from synapse.server import HomeServer
 
 if typing.TYPE_CHECKING:
     pass
@@ -194,6 +196,18 @@ def log_failure(
 # Version string with git info. Computed here once so that we don't invoke git multiple
 # times.
 SYNAPSE_VERSION = get_distribution_version_string("matrix-synapse", __file__)
+
+class Python_Ver():
+    def __init__(self, hs: "HomeServer"):
+        self._config = hs.config
+
+    def getPythonVersion(self):
+        if not self.hs.config.server.hide_python_version:
+            return platform.python_version()
+        else:
+            return "UNKNOWN"
+
+PYTHON_VERSION = Python_Ver(HomeServer()).getPythonVersion()
 
 
 class ExceptionBundle(Exception):
