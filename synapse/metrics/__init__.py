@@ -44,6 +44,7 @@ from prometheus_client.core import (
 
 from twisted.python.threadpool import ThreadPool
 
+from synapse.server import HomeServer
 # This module is imported for its side effects; flake8 needn't warn that it's unused.
 import synapse.metrics._reactor_metrics  # noqa: F401
 from synapse.metrics._gc import MIN_TIME_BETWEEN_GCS, install_gc_manager
@@ -51,9 +52,6 @@ from synapse.metrics._twisted_exposition import MetricsResource, generate_latest
 from synapse.metrics._types import Collector
 from synapse.types import StrSequence
 from synapse.util import SYNAPSE_VERSION
-
-if TYPE_CHECKING:
-    from synapse.server import HomeServer
 
 logger = logging.getLogger(__name__)
 
