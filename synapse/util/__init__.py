@@ -30,10 +30,9 @@ from twisted.internet.task import LoopingCall
 from twisted.python.failure import Failure
 
 from synapse.logging import context
-from synapse.server import HomeServer
 
 if typing.TYPE_CHECKING:
-    pass
+    from synapse.server import HomeServer
 
 logger = logging.getLogger(__name__)
 
