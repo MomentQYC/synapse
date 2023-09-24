@@ -50,6 +50,7 @@ from synapse.metrics._twisted_exposition import MetricsResource, generate_latest
 from synapse.metrics._types import Collector
 from synapse.types import StrSequence
 from synapse.util import SYNAPSE_VERSION
+from synapse.server import HomeServer as hs
 
 logger = logging.getLogger(__name__)
 
@@ -414,8 +415,14 @@ event_processing_lag_by_event = Histogram(
 build_info = Gauge(
     "synapse_build_info", "Build information", ["pythonversion", "version", "osversion"]
 )
+python_version = (
+    " ".join([platform.python_implementation(), platform.python_version()])
+    if not hs.config.server.hide_python_version
+    else "Unknown"
+)
+
 build_info.labels(
-    " ".join([platform.python_implementation(), platform.python_version()]),
+    python_version,
     SYNAPSE_VERSION,
     " ".join([platform.system(), platform.release()]),
 ).set(1)

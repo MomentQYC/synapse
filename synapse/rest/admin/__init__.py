@@ -112,7 +112,7 @@ class VersionServlet(RestServlet):
             "server_version": SYNAPSE_VERSION,
             "python_version": (
                 platform.python_version()
-                if not hs.config.hide_python_version
+                if not hs.config.server.hide_python_version
                 else "UNKNOWN"
             ),
         }
