@@ -202,7 +202,7 @@ class Python_Ver:
         self._config = hs.config
 
     def getPythonVersion(self):
-        if not self.hs.config.server.hide_python_version:
+        if not self._config.server.hide_python_version:
             return platform.python_version()
         else:
             return "UNKNOWN"

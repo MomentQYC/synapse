@@ -107,10 +107,7 @@ class VersionServlet(RestServlet):
 
     def __init__(self, hs: "HomeServer"):
         self._config = hs.config
-        self.res = {
-            "server_version": SYNAPSE_VERSION,
-            "python_version": PYTHON_VERSION
-        }
+        self.res = {"server_version": SYNAPSE_VERSION,"python_version": PYTHON_VERSION}
 
     def on_GET(self, request: SynapseRequest) -> Tuple[int, JsonDict]:
         return HTTPStatus.OK, self.res
