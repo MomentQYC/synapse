@@ -197,6 +197,7 @@ def log_failure(
 # times.
 SYNAPSE_VERSION = get_distribution_version_string("matrix-synapse", __file__)
 
+
 class Python_Ver:
     def __init__(self, hs: "HomeServer"):
         self._config = hs.config
@@ -206,6 +207,7 @@ class Python_Ver:
             return platform.python_version()
         else:
             return "UNKNOWN"
+
 
 PYTHON_VERSION = Python_Ver(HomeServer()).getPythonVersion()
 
