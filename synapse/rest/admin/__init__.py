@@ -107,7 +107,6 @@ class VersionServlet(RestServlet):
     PATTERNS = admin_patterns("/server_version$")
 
     def __init__(self, hs: "HomeServer"):
-        self.hs = hs
         self.res = {
             "server_version": SYNAPSE_VERSION,
             "python_version": (
